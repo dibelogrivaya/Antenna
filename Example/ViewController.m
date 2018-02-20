@@ -29,7 +29,9 @@ NSString * const AntennaExampleNotification = @"AntennaExampleNotification";
 #pragma mark - IBAction
 
 - (IBAction)triggerNotification:(id)__unused sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:AntennaExampleNotification object:nil];
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        [[NSNotificationCenter defaultCenter] postNotificationName:AntennaExampleNotification object:nil];
+    });
 }
 
 @end

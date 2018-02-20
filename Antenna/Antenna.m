@@ -307,7 +307,7 @@ requestSerializer:(AFHTTPRequestSerializer <AFURLRequestSerialization> *)request
 
 - (void)log:(NSDictionary *)payload {
     NSURLRequest *request = [self.requestSerializer requestWithMethod:self.method URLString:[self.URL absoluteString] parameters:payload error:nil];
-    [NSURLConnection sendAsynchronousRequest:request queue:self.operationQueue completionHandler:nil];
+    [NSURLConnection sendAsynchronousRequest:request queue:self.operationQueue completionHandler:^(__unused NSURLResponse * _Nullable response, __unused NSData * _Nullable data, __unused NSError * _Nullable connectionError) {}];
 }
 
 @end
@@ -344,7 +344,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 
 - (void)log:(NSDictionary *)payload {
     [self.context performBlock:^{
-        NSManagedObjectContext *entry = [NSEntityDescription insertNewObjectForEntityForName:self.entity.name inManagedObjectContext:self.context];
+        NSManagedObject *entry = [NSEntityDescription insertNewObjectForEntityForName:self.entity.name inManagedObjectContext:self.context];
         [entry setValue:AntennaLogLineFromPayload(payload) forKey:self.messageAttribute.name];
         [entry setValue:[NSDate date] forKey:self.timestampAttribute.name];
 

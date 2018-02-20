@@ -28,18 +28,10 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(__unused UIApplication *)application
-didFinishLaunchingWithOptions:(__unused NSDictionary *)launchOptions
-{
-    [[Antenna sharedLogger] addChannelWithURL:[NSURL URLWithString:@"http://localhost:5000"] method:@"LOG"];
+- (BOOL)application:(__unused UIApplication *)application didFinishLaunchingWithOptions:(__unused NSDictionary *)launchOptions {
+    [[Antenna sharedLogger] addChannelWithURL:[NSURL URLWithString:@"http://localhost:3000/logs"] method:@"POST"];
     [[Antenna sharedLogger] startLoggingApplicationLifecycleNotifications];
     [[Antenna sharedLogger] startLoggingNotificationName:AntennaExampleNotification];
-
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
-
     return YES;
 }
 
